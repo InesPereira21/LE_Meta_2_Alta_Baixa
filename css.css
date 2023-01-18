@@ -1,0 +1,532 @@
+* {
+    margin: 0;
+}
+
+html {
+    scroll-behavior: smooth
+}
+
+body {
+    font-family: "IBM Plex Serif", serif;
+}
+
+/* ———————————————————————————————————————————————————————————————————————————————————————————————————————————————— */
+/* fade em cima e em baixo da página */
+/* ———————————————————————————————————————————————————————————————————————————————————————————————————————————————— */
+#top {
+    position: fixed;
+    height: 10vh;
+    width: 100%;
+    top: 0;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+    z-index: 19;
+}
+
+#bottom {
+    position: fixed;
+    height: 10vh;
+    width: 100%;
+    bottom: 0;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+    z-index: 19;
+}
+
+/* ———————————————————————————————————————————————————————————————————————————————————————————————————————————————— */
+/* menu */
+/* ———————————————————————————————————————————————————————————————————————————————————————————————————————————————— */
+#menuToggle {
+    display: inline-block;
+    position: fixed;
+    top: 2vh;
+    right: 1vw;
+    z-index: 20;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+#menuToggle a {
+    text-decoration: none;
+    color: black;
+    transition: color 0.3s ease;
+}
+
+#menuToggle a:hover {
+    color: #69aa43;
+}
+
+#menuToggle input {
+    display: block;
+    width: 40px;
+    height: 32px;
+    position: absolute;
+    top: -7px;
+    left: -5px;
+    cursor: pointer;
+    opacity: 0;
+    z-index: 21;
+    -webkit-touch-callout: none;
+}
+
+/* Just a quick hamburger */
+#menuToggle span {
+    display: block;
+    width: 33px;
+    height: 4px;
+    margin-bottom: 5px;
+    position: relative;
+    background: black;
+    border-radius: 3px;
+    z-index: 20;
+    transform-origin: 4px 0px;
+    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+    background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+    opacity 0.55s ease;
+}
+
+#menuToggle span:first-child {
+    transform-origin: 0% 0%;
+}
+
+#menuToggle span:nth-last-child(2) {
+    transform-origin: 0% 100%;
+}
+
+/* Transform all the slices of hamburger into a crossmark. */
+#menuToggle input:checked ~ span {
+    opacity: 1;
+    transform: rotate(45deg) translate(-2px, -1px);
+    background: #232323;
+}
+
+/* But let's hide the middle one. */
+#menuToggle input:checked ~ span:nth-last-child(3) {
+    opacity: 0;
+    transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+/* Oh yeah and the last one should go the other direction */
+#menuToggle input:checked ~ span:nth-last-child(2) {
+    transform: rotate(-45deg) translate(0, -1px);
+}
+
+/* Make this absolute positioned at the top left of the screen */
+#menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 2vh;
+    padding-top: 4vh;
+    background: rgba(255,255,255,0.8);
+    list-style-type: none;
+    -webkit-font-smoothing: antialiased;
+    transform-origin: 0% 0%;
+    transform: translate(100%, 0);
+    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+
+#menu li {
+    padding: 0.3vh 0;
+    font-size: 2vh;
+}
+
+ul {
+    list-style-type: none;
+}
+
+#menu ul li {
+    font-size: 1.5vh;
+}
+
+/* And let's slide it in from the left */
+#menuToggle input:checked ~ ul {
+    transform: none;
+}
+
+/* ———————————————————————————————————————————————————————————————————————————————————————————————————————————————— */
+/* loaded animations aAalta bBbaixaa */
+/* ———————————————————————————————————————————————————————————————————————————————————————————————————————————————— */
+@keyframes opacity {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes nav_position1 {
+    0% {
+        left: 38%;
+        top: 38%;
+        font-size: 8vh;
+    }
+    100% {
+        left: 0;
+        top: 0;
+        font-size: 3vh;
+    }
+}
+
+@keyframes nav_position2 {
+    0% {
+        right: 38%;
+        bottom: 38%;
+        font-size: 8vh;
+    }
+    100% {
+        right: 0;
+        bottom: 0;
+        font-size: 3vh;
+    }
+}
+
+@keyframes scale_cantos_horiz {
+    0% {
+        width: 26px;
+        height: 4px;
+    }
+    100% {
+        width: 13px;
+        height: 2px;
+    }
+}
+
+@keyframes scale_cantos_vert {
+    0% {
+        height: 26px;
+        width: 4px;
+    }
+    100% {
+        height: 13px;
+        width: 2px;
+    }
+}
+
+/* ———————————————————————————————————————————————————————————————————————————————————————————————————————————————— */
+/* fade in inicial */
+/* ———————————————————————————————————————————————————————————————————————————————————————————————————————————————— */
+main, #menuToggle {
+    animation: 3s cubic-bezier(.95,.05,.8,.04) opacity;
+}
+
+/* ———————————————————————————————————————————————————————————————————————————————————————————————————————————————— */
+/* aAalta bBbaixaa */
+/* ———————————————————————————————————————————————————————————————————————————————————————————————————————————————— */
+
+#alta , #baixa {
+    font-size: 3vh;
+    margin: 1vh;
+    position: fixed;
+    z-index: 20;
+}
+
+#alta, #alta h1 {
+    left: 0;
+    top: 0;
+    /*animation: 3s cubic-bezier(1,.01,0,1.02) nav_position1;*/
+    animation: 3s ease-in-out nav_position1;
+}
+
+#baixa, #baixa h1 {
+    right: 0;
+    bottom: 0;
+    animation: 3s ease-in-out nav_position2;
+}
+
+[id^="canto"] {
+    display: block;
+    position: absolute;
+    background: #69aa43;
+    z-index: 20;
+    animation: 3s ease-in-out scale_cantos;
+}
+
+#canto1 {
+    width: 20%;
+    height: 5%;
+    top: 0;
+    left: -4%;
+}
+
+#canto2 {
+    height: 34%;
+    width: 2.5%;
+    top: 0;
+    left: -4%;
+}
+
+#canto3 {
+    width: 16%;
+    height: 5%;
+    bottom: 8%;
+    right: -6%;
+}
+
+#canto4 {
+    height: 36%;
+    width: 2%;
+    bottom: 8%;
+    right: -6%;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+h1 {
+    font-family: "editorial_new_thin", serif;
+    font-size: 3vh;/*
+    padding: 1vh;
+    position: fixed;*/
+
+}
+
+/* ———————————————————————————————————————————————————————————————————————————————————————————————————————————————— */
+/* Artigo 1 - Título */
+/* ———————————————————————————————————————————————————————————————————————————————————————————————————————————————— */
+#track1 {
+    display: block;
+    height: 200vh;
+}
+
+.camera {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+}
+
+#artigo1imgCapa {
+    position: absolute;
+    width: 60vw;
+    height: 60vh;
+    object-fit: cover;
+    object-position: right;
+    opacity: 0;
+}
+
+#artigo1autor {
+    position: absolute;
+    font-family: "editorial_new_thin", serif;
+    font-size: 3vh;
+    left: 70%;
+    opacity: 0;
+}
+
+#artigo1titulo2 {
+    text-align: right;
+}
+
+h2 {
+    position: absolute;
+    font-family: "editorial_new_thin", serif;
+    font-size: 8vh;
+    line-height: 1.2;
+}
+
+/* ———————————————————————————————————————————————————————————————————————————————————————————————————————————————— */
+/* Artigo 1 - Horizontal Scroll */
+/* ———————————————————————————————————————————————————————————————————————————————————————————————————————————————— */
+#track2 {
+    display: block;
+    height: 400vh;
+}
+
+.horizontal-scroll {
+    display: flex;
+    gap: 4vh;
+    position: absolute;
+    left: 2vw;
+}
+
+.horizontal-scroll__item {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 400px;
+    height: 85vh;
+    font-size: 2vh;
+    scroll-snap-align: start;
+    hyphens: auto;
+}
+
+.margin_top {
+    margin-top: auto;
+}
+
+#big_text_A1 {
+    flex: 0 0 180px;
+    font-family: "editorial_new_regular", serif;
+    font-size: 3vh;
+    line-height: 4vh;
+    hyphens: none;
+}
+
+.artigo1imgDiv {
+    margin-bottom: auto;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.artigo1img {
+    margin-bottom: auto;
+    width: 75%;
+    align-self: center;
+}
+
+h3 {
+    font-family: "editorial_new_regular", serif;
+    font-size: 3vh;
+    hyphens: none;
+}
+
+.legenda {
+    color: #69aa43;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    align-self: center;
+    /*align-self: end;*/
+    opacity: 0;
+    transition: .5s ease;
+}
+.legenda p {
+    display: block;
+    text-align: center;
+    width: 70%;
+    transition: .5s ease;
+}
+
+.artigo1imgDiv:hover .legenda, .artigo1imgDiv:hover .legenda p{
+    opacity: 1;
+}
+
+/* ———————————————————————————————————————————————————————————————————————————————————————————————————————————————— */
+/* Artigo 2 - Título */
+/* ———————————————————————————————————————————————————————————————————————————————————————————————————————————————— */
+#artigo2 h2 {
+    position: relative;
+}
+
+#artigo2 h3 {
+    font-family: "editorial_new_thin", serif;
+    font-size: 4vh;
+}
+
+#artigo2titulo {
+    height: 80vh;
+    display: grid;
+    gap: 1vh;
+    padding: 2vw;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    align-items: start;
+}
+
+#artigo2titulo [id^="tItem"], #artigo2autor {
+
+    min-height: 20vh;
+    z-index: 5;
+}
+
+#tItem1 {
+    grid-column: 1/3;
+    grid-row: 1/3;
+}
+
+#tItem2 {
+    grid-column: 4/7;
+    grid-row: 2/4;
+}
+
+#tItem3 {
+    grid-column: 1/4;
+    grid-row: 5/6;
+}
+
+#artigo2autor {
+    font-family: "editorial_new_thin", serif;
+    font-size: 3vh;
+
+    grid-column: 6/7;
+    grid-row: 5/6;
+}
+
+#tItem5 {
+    grid-column: 1/7;
+    grid-row: 4/5;
+}
+
+#artigo2titulo img {
+    position: absolute;
+    /*opacity: 0.5;*/
+    mix-blend-mode: multiply;
+}
+
+#artigo2TitImg1 {
+    width: 15vw;
+    left: 2vw;
+}
+
+#artigo2TitImg2 {
+    width: 25vw;
+    left: 15vw;
+}
+
+#artigo2TitImg3 {
+    width: 20vw;
+    right: 10vw;
+}
+
+#artigo2TitImg4 {
+    width: 40vw;
+    right: 2vw;
+}
+
+/* ———————————————————————————————————————————————————————————————————————————————————————————————————————————————— */
+/* Artigo 2 */
+/* ———————————————————————————————————————————————————————————————————————————————————————————————————————————————— */
+
+.spacer {
+    height: 10vh;
+    grid-column: 1/9;
+}
+
+[id^="part"] {
+    min-height: 100vh;
+    display: grid;
+    position: relative;
+    gap: 4vh;
+    padding-right: 2vw;
+    padding-left: 2vw;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    align-items: start;
+}
+
+#big_text_A2 {
+    font-family: "editorial_new_regular", serif;
+    font-size: 3vh;
+    line-height: 4vh;
+    hyphens: none;
+}
+
+#artigo2texto p {
+    z-index: 5;
+    hyphens: auto;
+}
+
+[id^="artigo2img"] {
+    position: absolute;
+    mix-blend-mode: multiply;
+}
+
+#artigo2img12, #artigo2img13 {
+    position: relative;
+    width: 90vw;
+    left: 5vw;
+}
